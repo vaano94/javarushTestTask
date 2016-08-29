@@ -1,0 +1,115 @@
+<html>
+  <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <script src="resources/js/angular.js"></script>
+
+      <!--Icons-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+      <script src="resources/js/angular/controller.js"></script>
+      <script src="resources/js/jquery-2.2.0.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+      <link href="resources/css/materialize.css" rel="stylesheet" >
+      <link href="resources/css/angular-material.min.css" rel="stylesheet" >
+      <script src="resources/js/materialize.js"></script>
+
+  </head>
+
+  <body ng-app='app' layout="column" layout-align="top center">
+    <div ng-controller="taskController as ctrl"  ng-init="getAllTasks()">
+
+
+        <nav>
+            <div class="nav-wrapper blue">
+                <a href="#" class="brand-logo">TODOшки</a>
+            </div>
+        </nav>
+
+
+
+        <div class="container">
+
+
+            <div class="row col s6">
+
+            <div class="input-field col s12">
+                <select id="filterSel">
+                    <option value="" disabled selected>Select criteria</option>
+                    <option value="All">All TODOS</option>
+                    <option value="Uncompl">Only uncompleted</option>
+                    <option value="Compl">Competed</option>
+                </select>
+                <label></label>
+
+            </div>
+                <div class="center-align">
+                    <a class="btn-floating btn-large waves-effect waves-light blue" ng-click="addNewTask($event)"><i class="material-icons">add</i></a>
+                </div>
+
+            <div class="row">
+
+                <div ng-repeat="temp in ctrl.tempTasks track by $index">
+
+                    <div class="row">
+                        <div class="col s12 m8 offset-m2">
+                            <div class="card blue-grey darken-1">
+                                <div class="card-content white-text">
+                                    <input type="text" style="font-size: 1.64rem" id="temp{{$index}}" name="temp{{$index}}" ng-model="forms[$index]">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-repeat="task in allTasks">
+                    <div class="row" id="{{task.id}}" ng-hide = "checkTaskShown(task.id)"  >
+                        <div class="col s12 m8 offset-m2">
+                            <div class="card blue-grey darken-1">
+                                <div class="card-content white-text">
+                                    <div class="right-align">
+                                        <a ><i class="small material-icons" id="{{task.id}}+del" ng-click="makeDeleted(task.id)" style="color: #a95d51; cursor:pointer">delete</i></a>
+                                    </div>
+                                    <!--<span class="card-title">Card Title</span>-->
+                                    <h5>{{task.text}}</h5>
+                                    <div id="sws{{task.id}}"  class="switch right-align">
+                                        <label>
+
+                                            <input type="checkbox" id="sw{{task.id}}">
+                                            <span  class="lever" ng-click="makeCompleted(task.id)"></span>
+                                            Done
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                <div class="center-align">
+                <a class="waves-effect waves-light btn"  ng-click="updateProgress()">update progress</a>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <script type="text/ng-template" id="form1.tpl.html">
+                <input type="text">
+        </script>
+
+
+
+    </div>
+
+
+
+
+  </body>
+
+
+</html>

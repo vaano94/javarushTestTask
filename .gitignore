@@ -1,0 +1,5 @@
+.idea
+target
+.gitignore
+JavarushTestTask.iml
+src/main/webapp/index2.jsp
